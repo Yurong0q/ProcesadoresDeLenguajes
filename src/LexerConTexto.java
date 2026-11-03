@@ -2,33 +2,41 @@ import es.upm.aedlib.Pair;
 import java.io.FileWriter;
 import java.io.IOException;
 
-//TokenTexto es una clase intermedia para pasarle tokens al sintactico mientras imprimo
-//el token ya en un archivo txt
-public class TokenTexto {
-    
+//LexerConTexto es una clase intermedia para pasarle tokens al sint-sem mientras imprimo
+//el token ya en un archivo .txt
+public class LexerConTexto {
+
     private Analizador_Lexico aLex;
     private FileWriter writer;
 
-    public TokenTexto (Analizador_Lexico aLex, String archivoTokens) throws IOException {
+    public LexerConTexto(Analizador_Lexico aLex, String archivoTokens) throws IOException {
         this.aLex = aLex;
         this.writer = new FileWriter(archivoTokens);
     }
 
     /**
-     * Devuelve el siguiente token junto con su posición (linea, columna) mientras escribe en 
+     * Devuelve el siguiente token junto con su posición (linea, columna) mientras
+     * escribe en
      * archivo
      */
-    public Pair<Token, Pair<Integer, Integer>> nextTokenWithPos() {
+    public Pair<Pair<Token,Integer>, Pair<Integer, Integer>> nextTokenWithPos() {
+
+        Pair<Pair<Token,Integer>, Pair<Integer, Integer>> par = aLex.iniciar();
+        return par;
+    }
+
+    /**
+     * Imprime token
+     * 
+     * @param token token a imprimir
+     */
+    public void imprimirToken(Token token) {
         try {
-            Pair<Token, Pair<Integer, Integer>> par = aLex.iniciar();
-            Token token = par.getLeft();
             if (token != null) {
                 escribirToken(token); // Escribe en archivo
             }
-            return par;
         } catch (IOException e) {
             e.printStackTrace();
-            return new Pair<>(null, null);
         }
     }
 
@@ -36,7 +44,8 @@ public class TokenTexto {
      * Escritura del token en el archivo (deberia ser igual al que teniamos antes)
      */
     private void escribirToken(Token token) throws IOException {
-        if (token == null) return;
+        if (token == null)
+            return;
 
         String salida = "<" + token.getTipo().ordinal() + ", ";
 
@@ -48,7 +57,7 @@ public class TokenTexto {
                 salida += token.getNum();
                 break;
             case TYPE_ENTERO:
-                salida += (int)token.getNum();
+                salida += (int) token.getAtributo();
                 break;
             default:
                 // Si tiene atributo (ej: posición en TS) lo imprime; si no, deja vacío
@@ -66,7 +75,8 @@ public class TokenTexto {
      */
     public void close() {
         try {
-            if (writer != null) writer.close();
+            if (writer != null)
+                writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

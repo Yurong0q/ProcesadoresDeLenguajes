@@ -1,6 +1,7 @@
 /tabladesimbolos.txt
 /tokens.txt
 *.class
-/bin/
+/bin/*
 /parse.txt
 /prueba.java
+PdL.jar

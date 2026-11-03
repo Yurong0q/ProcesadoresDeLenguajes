@@ -6,6 +6,7 @@ public class Token {
     private Integer atributo;
     private String atrLex;
     private double atrNum;
+    private int pos;
 
     public Token(TipoToken tipo, Integer atributo) {
         this.tipo = tipo;
@@ -38,6 +39,22 @@ public class Token {
         return atrNum;
     }
 
+    public int getPos() {
+        return pos;
+    }
+
+    public void setAtributo(int pos){
+        this.atributo = pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public void setLexema(String lex){
+        this.atrLex = lex;
+    }
+    
     @Override
     public boolean equals(Object obj){
         if (this == obj)

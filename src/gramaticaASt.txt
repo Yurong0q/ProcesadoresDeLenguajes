@@ -1,9 +1,9 @@
 Terminales = { && > < + - ! real cadena entero id write read return = |=
 let if ( ) { } for int float boolean string void function ; , eof }
 
-NoTerminales = { P E E_AND E1 E1_REL E2 E2_ARIT E3 E4 S S_SIMPLE S_COMPUESTA ASIGFUN A L Q X T INI ACTU C F H B K }
+NoTerminales = { I P E E_AND E1 E1_REL E2 E2_ARIT E3 E4 S S_SIMPLE S_COMPUESTA ASIGFUN A L Q X T INI ACTU C F H B K }
 
-Axioma = P
+Axioma = I
 
 Producciones = {
     I -> P
